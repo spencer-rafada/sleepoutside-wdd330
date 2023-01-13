@@ -11,6 +11,7 @@ function getCartContents() {
   // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
 }
 
+//renders the items
 function renderCartItem(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
