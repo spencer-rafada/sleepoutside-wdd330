@@ -1,18 +1,34 @@
-import { setLocalStorage } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
-
-const dataSource = new ProductData("tents");
-
-function addProductToCart(product) {
-  setLocalStorage("so-cart", product);
+//Converting to Json
+let products = [];
+function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Not Good!! ERROR!");
+  }
 }
+
+function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+// get tents data by fetching th json file
+function getProductsData() {
+  fetch("../json/tents.json")
+    .then(convertToJson)
+    .then((data) => {
+      products = data;
+    });
+}
+
 // add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
+function addToCart(e) {
+  const product = products.find((item) => item.Id === e.target.dataset.id);
+  products = [...products, product];
+  setLocalStorage("so-cart", products);
 }
 
+// calling the function to fetch the data
+getProductsData();
 // add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+document.getElementById("addToCart").addEventListener("click", addToCart);
