@@ -14,19 +14,19 @@ window.addEventListener(`load`, () => {
 });
 
 // Remove items from the cart event listener
-window.addEventListener(`click`, () => {
-  document.querySelectorAll(`[data-id]`).forEach((item) => {
-    item.addEventListener(`click`, removeClickedHandler);
-  });
-});
 
 // function that has an arry with the info from local storage
 function getCartContents() {
-  document.querySelector(".product-list").innerHTML = "";
+  document.querySelector(`.product-list`).innerHTML = "";
   let markup = "";
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage(`so-cart`);
   const htmlItems = cartItems.map((item) => renderCartItem(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  document.querySelector(`.product-list`).innerHTML = htmlItems.join("");
+
+  // Remove item event handler
+  document.querySelectorAll(`[data-id]`).forEach((item) => {
+    item.addEventListener(`click`, removeClickedHandler);
+  });
   // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
 }
 
