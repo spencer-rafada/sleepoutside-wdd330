@@ -21,20 +21,25 @@ function getCartContents() {
   let markup = "";
   const cartItems = getLocalStorage(`so-cart`);
   const htmlItems = cartItems.map((item) => renderCartItem(item));
+  
   document.querySelector(`.product-list`).innerHTML = htmlItems.join("");
-
-  // Remove item event handler
-  document.querySelectorAll(`[data-id]`).forEach((item) => {
-    item.addEventListener(`click`, removeClickedHandler);
-  });
+  
+  // // show the total amount
+  total = 0;
+  document.querySelectorAll(`cart-card__price`).forEach(totalAmount);
   // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
+}
+
+// total amount function
+function totalAmount(item){
+  total += item; 
 }
 
 // renders the items
 function renderCartItem(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
-    <img
+    <img 
       src="${item.Image}"
       alt="${item.Name}"
     />
@@ -59,3 +64,5 @@ const removeClickedHandler = (event) => {
   setLocalStorage(`so-cart`, cartItems);
   getCartContents();
 };
+
+

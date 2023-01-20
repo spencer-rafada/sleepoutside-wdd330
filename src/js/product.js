@@ -1,3 +1,12 @@
+import ProductData from './ProductData.mjs';
+import { setLocalStorage, getParam } from './utils.mjs';
+
+const dataSource = new ProductData('tents');
+const productId = getParam('product');
+console.log(productId)
+console.log(dataSource.findProductById(productId));
+
+
 //Converting to Json
 let products = [];
 function convertToJson(res) {
@@ -8,9 +17,6 @@ function convertToJson(res) {
   }
 }
 
-function setLocalStorage(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
-}
 
 // get tents data by fetching th json file
 function getProductsData() {
