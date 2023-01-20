@@ -166,6 +166,17 @@ button {
   width: 100%;
 }
 
+
+.product-card__price {
+  display: inline;
+  } 
+/* styles for discount */
+.product-card__discount {
+  color: red;
+  text-decoration: line-through;
+  display: inline;
+  } 
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
