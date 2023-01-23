@@ -79,6 +79,8 @@ header {
   line-height: 1;
 }
 
+
+
 .logo--square img {
   width: 90px;
   height: 90px;
@@ -247,6 +249,16 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 }
+
+.product-card__price {
+  display: inline;
+  } 
+  /*discount added*/
+.product-card__markup {
+  color: red;
+  text-decoration: line-through;
+  display: inline;
+  } 
 
 footer {
   font-size: var(--small-font);
