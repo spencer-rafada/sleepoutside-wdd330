@@ -37,7 +37,8 @@ export default class ProductDetails {
         alt="${product.Name}"
       />
 
-      <p class="product-card__price">$${product.FinalPrice}</p>
+      <h3 class="product-card__markup">$${this.product.SuggestedRetailPrice}</h3>
+      <h2 class="product-card__price">$${this.product.FinalPrice}</h2>
 
       <p class="product__color">${product.Colors[0].ColorName}</p>
 
