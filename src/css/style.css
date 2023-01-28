@@ -87,7 +87,7 @@ header {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -112,6 +112,24 @@ button {
 }
 
 /* End utility classes */
+
+/* Alert styles */
+.alert-list {
+  position: fixed;
+  z-index: 100;
+  left: calc(50% - 60px);
+  top: 0;
+  text-align: center;
+}
+
+.alert {
+  display: block;
+  margin: 0;
+  padding: 1rem;
+  border: solid 1px var(--primary-color);
+}
+
+/* End Alert styles*/
 
 /* Cart icon styles */
 .cart {
@@ -252,13 +270,14 @@ button {
 
 .product-card__price {
   display: inline;
-  } 
-  /*discount added*/
+}
+
+/*discount added*/
 .product-card__markup {
   color: red;
   text-decoration: line-through;
   display: inline;
-  } 
+}
 
 footer {
   font-size: var(--small-font);
