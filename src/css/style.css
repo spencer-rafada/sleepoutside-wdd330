@@ -79,15 +79,13 @@ header {
   line-height: 1;
 }
 
-
-
 .logo--square img {
   width: 90px;
   height: 90px;
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
