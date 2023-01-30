@@ -269,7 +269,7 @@ button {
 .product-card__price {
   display: inline;
 }
-
+/*total hide*/
 .hide {
   display: none;
 }

@@ -29,7 +29,6 @@ function getTotal(cartItems) {
 // function that has an arry with the info from local storage
 function getCartContents() {
   document.querySelector(`.product-list`).innerHTML = "";
-  let markup = "";
   const cartItems = getLocalStorage(`so-cart`);
   //Continue if we have items in cart
   if (cartItems) {
