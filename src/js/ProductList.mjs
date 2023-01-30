@@ -1,15 +1,12 @@
 export default class ProductListing {
+  constructor(category, dataSource, listElement) {
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
 
-    
-    constructor(category, dataSource, listElement) {
-      
-      this.category = category;
-      this.dataSource = dataSource;
-      this.listElement = listElement;
-    }
-
-    productCardTemplate(product) {
-        return `<li class="product-card">
+  productCardTemplate(product) {
+    return `<li class="product-card">
         <a href="product_pages/index.html?product=${product.Id}">
         <img
           src="${product.Image}"
@@ -19,28 +16,23 @@ export default class ProductListing {
         <h2 class="card__name">${product.Name}</h2>
         <p class="product-card__markup">$${product.SuggestedRetailPrice}</p>
         <h3 class="product-card__price">${product.FinalPrice}</h3></a>
-      </li>`
-    } 
-    async init() {
-      
-      const list = await this.dataSource.getData();
-      console.log(list);
-
-      const filteredList = this.filterProduct(list);
-      this.renderList(filteredList);
-
-
-    }
-
-    renderList(list){
-        const render = list.map(this.productCardTemplate);
-        this.listElement.insertAdjacentHTML("afterbegin", render.join(""));
-    }
-
-    filterProduct(productList)
-    {
-        return productList.filter(product => product.Id !="989CG" && product.Id !="880RT");
-    }
-
-            
+      </li>`;
   }
+  async init() {
+    const list = await this.dataSource.getData();
+
+    const filteredList = this.filterProduct(list);
+    this.renderList(filteredList);
+  }
+
+  renderList(list) {
+    const render = list.map(this.productCardTemplate);
+    this.listElement.insertAdjacentHTML("afterbegin", render.join(""));
+  }
+
+  filterProduct(productList) {
+    return productList.filter(
+      (product) => product.Id != "989CG" && product.Id != "880RT"
+    );
+  }
+}

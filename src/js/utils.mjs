@@ -29,3 +29,12 @@ export const getParams = (param) => {
   const product = urlParams.get(param);
   return product;
 };
+
+// converting to json
+export default function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Bad Response");
+  }
+}
