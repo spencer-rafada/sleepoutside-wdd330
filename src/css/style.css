@@ -270,6 +270,14 @@ button {
   display: inline;
 }
 
+.hide {
+  display: none;
+}
+
+.cart-footer {
+  padding: 0.5em;
+}
+
 /*discount added*/
 .product-card__markup {
   color: red;

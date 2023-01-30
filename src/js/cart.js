@@ -13,15 +13,30 @@ window.addEventListener(`load`, () => {
   getCartContents();
 });
 
-// Remove items from the cart event listener
+function getTotal(cartItems) {
+  var total = 0;
+  //loop through all items in cart and add prices
+  for (let i = 0; i < cartItems.length; i++) {
+    total += cartItems[i].FinalPrice;
+  }
+  //Show the footer (we have items in our cart)
+  var footer = document.getElementById("cart-footer");
+  footer.classList.toggle("hide");
+  var cartTotal = document.querySelector(".cart-total");
+  cartTotal.innerHTML = `Total: $${total}`; //Show the total price
+}
 
 // function that has an arry with the info from local storage
 function getCartContents() {
   document.querySelector(`.product-list`).innerHTML = "";
   let markup = "";
   const cartItems = getLocalStorage(`so-cart`);
-  const htmlItems = cartItems.map((item) => renderCartItem(item));
-  document.querySelector(`.product-list`).innerHTML = htmlItems.join("");
+  //Continue if we have items in cart
+  if (cartItems) {
+    getTotal(cartItems); //Calculate the total price of cart
+    const htmlItems = cartItems.map((item) => renderCartItem(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  }
 
   // Remove item event handler
   document.querySelectorAll(`[data-id]`).forEach((item) => {
