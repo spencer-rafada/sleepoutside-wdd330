@@ -13,6 +13,28 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+// export function renderWithTemplate(
+//   templateFn,
+//   parentElement,
+//   list,
+//   position = "afterbegin",
+//   clear = false
+// ) {
+//   const htmlStrings = list.map(templateFn);
+//   // if clear is true we need to clear out the contents of the parent.
+//   if (clear) {
+//     parentElement.innerHTML = "";
+//   }
+//   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+// }
+
+export default function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if(callback) {
+      callback(data);
+  }
+}
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -37,4 +59,19 @@ export default function convertToJson(res) {
   } else {
     throw new Error("Bad Response");
   }
+}
+
+async function loadTemplate(path){
+  const response = await fetch(path);
+  const template = response.text();
+  return template;
+}
+
+export async function loadHeaderFooter(){
+  const footer = await loadTemplate("../public/partials/footer.html");
+  const header = await loadTemplate("../public/partials/header.html");
+  const footerElement = document.querySelector("footer");
+  const headerElement = document.querySelector("header");
+  renderWithTemplate(header, headerElement);
+  renderWithTemplate(footer, footerElement);
 }

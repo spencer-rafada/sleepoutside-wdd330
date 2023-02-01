@@ -1,3 +1,4 @@
+import { loadHeaderFooter } from "./utils.mjs";
 // get info from local storage
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
@@ -11,6 +12,7 @@ function setLocalStorage(key, data) {
 // Render Items for the first load
 window.addEventListener(`load`, () => {
   getCartContents();
+  loadHeaderFooter();
 });
 
 function getTotal(cartItems) {
