@@ -29,10 +29,15 @@ export function setLocalStorage(key, data) {
 //   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 // }
 
-export default function renderWithTemplate(template, parentElement, data, callback) {
+export default function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  callback
+) {
   parentElement.insertAdjacentHTML("afterbegin", template);
-  if(callback) {
-      callback(data);
+  if (callback) {
+    callback(data);
   }
 }
 // set a listener for both touchend and click
@@ -53,7 +58,7 @@ export const getParams = (param) => {
 };
 
 // converting to json
-export default function convertToJson(res) {
+export function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
@@ -61,13 +66,13 @@ export default function convertToJson(res) {
   }
 }
 
-async function loadTemplate(path){
+async function loadTemplate(path) {
   const response = await fetch(path);
   const template = response.text();
   return template;
 }
 
-export async function loadHeaderFooter(){
+export async function loadHeaderFooter() {
   const footer = await loadTemplate("../public/partials/footer.html");
   const header = await loadTemplate("../public/partials/header.html");
   const footerElement = document.querySelector("footer");
