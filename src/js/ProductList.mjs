@@ -1,3 +1,4 @@
+import { renderWithTemplate } from "./utils.mjs";
 export default class ProductListing {
   constructor(category, dataSource, listElement) {
     this.category = category;
@@ -24,6 +25,8 @@ export default class ProductListing {
     const filteredList = this.filterProduct(list);
     this.renderList(filteredList);
   }
+
+
 
   renderList(list) {
     const render = list.map(this.productCardTemplate);
