@@ -5,7 +5,8 @@ export default class ProductDetails {
     this.productId = productId;
     this.dataSource = dataSource;
     this.product = {};
-    this.products = getLocalStorage(`so-cart`);
+    this.products =
+      getLocalStorage(`so-cart`) === null ? [] : getLocalStorage(`so-cart`);
     this.init();
   }
 
