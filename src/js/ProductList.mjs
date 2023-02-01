@@ -1,4 +1,3 @@
-import { renderWithTemplate } from "./utils.mjs";
 export default class ProductListing {
   constructor(category, dataSource, listElement) {
     this.category = category;
