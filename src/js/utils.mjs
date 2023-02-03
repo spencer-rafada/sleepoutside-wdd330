@@ -14,22 +14,8 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-// export function renderWithTemplate(
-//   templateFn,
-//   parentElement,
-//   list,
-//   position = "afterbegin",
-//   clear = false
-// ) {
-//   const htmlStrings = list.map(templateFn);
-//   // if clear is true we need to clear out the contents of the parent.
-//   if (clear) {
-//     parentElement.innerHTML = "";
-//   }
-//   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
-// }
-
 export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = ``;
   parentElement.insertAdjacentHTML("afterbegin", template);
   if (callback) {
     callback(data);
