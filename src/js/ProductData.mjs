@@ -1,4 +1,4 @@
-import convertToJson from "./utils.mjs";
+import { convertToJson } from "./utils.mjs";
 
 export default class ProductData {
   constructor(category) {
