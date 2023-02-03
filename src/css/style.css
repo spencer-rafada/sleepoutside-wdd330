@@ -125,6 +125,36 @@ button {
   margin: 0;
   padding: 1rem;
   border: solid 1px var(--primary-color);
+  position: relative;
+  transform: translateY(-100%);
+}
+
+.alert {
+  animation: slide-in 0.5s forwards;
+}
+
+.alert-out {
+  animation: slide-out 0.5s forwards;
+}
+
+@keyframes slide-in {
+  90% {
+    transform: translateY(10%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slide-out {
+  10% {
+    transform: translateY(10%);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
 /* End Alert styles*/
@@ -269,6 +299,7 @@ button {
 .product-card__price {
   display: inline;
 }
+
 /*total hide*/
 .hide {
   display: none;

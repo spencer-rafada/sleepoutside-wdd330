@@ -42,6 +42,10 @@ export default class Alert {
     const parent = document.querySelector(`.alert-list`);
     const elements = document.querySelectorAll(`.alert`);
     elements.forEach((item) => {
+      // add class for animation at the last second
+      setTimeout(() => {
+        item.setAttribute(`class`, `alert alert-out`);
+      }, 9000);
       setTimeout(() => {
         parent.removeChild(item);
       }, 10000);
