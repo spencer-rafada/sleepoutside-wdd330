@@ -22,8 +22,8 @@ export default class ProductListing {
     const list = await this.dataSource.getData(this.category);
 
     const filteredList = this.filterProduct(list);
-    this.renderList(filteredList);
     this.renderProductCategory(this.category);
+    this.renderList(filteredList);
   }
 
   renderProductCategory(category) {
