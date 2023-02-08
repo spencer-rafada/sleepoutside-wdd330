@@ -289,6 +289,19 @@ button {
 .product-detail img {
   width: 100%;
 }
+/* newsLetter*/
+.newsletterSignUp{
+  text-align: center;
+  border: #f0a868 solid 2px;
+  margin: 2rem;
+  padding-bottom: 1rem;
+ }
+ .newsletterSignUp form{
+   text-align: left;
+   margin: auto;
+   line-height: 2rem;
+   margin-left: 12px;
+ }
 
 /* Start cart list card styles */
 .cart-card {
