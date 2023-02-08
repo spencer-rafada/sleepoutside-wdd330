@@ -85,7 +85,7 @@ header {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -274,7 +274,6 @@ button {
 }
 
 /* end of categories */
-
 
 .products {
   padding: 0.5em;
