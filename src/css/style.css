@@ -240,8 +240,37 @@ button {
 
 /* Start of categories */
 .categories {
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
 
+.category {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  transition: 0.3s transform;
+}
+
+.category:hover {
+  transform: scale(1.1);
+}
+
+.category img {
+  width: 100px;
+}
+
+.category a {
+  text-decoration: none;
+  color: var(--dark-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.category a:hover {
+  color: var(--primary-color);
 }
 
 /* end of categories */
@@ -249,6 +278,10 @@ button {
 
 .products {
   padding: 0.5em;
+}
+
+.products h2 {
+  text-transform: capitalize;
 }
 
 .product-list {
