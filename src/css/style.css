@@ -85,7 +85,7 @@ header {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -238,6 +238,15 @@ button {
   margin: auto;
 }
 
+/* Start of categories */
+.categories {
+  display: grid;
+
+}
+
+/* end of categories */
+
+
 .products {
   padding: 0.5em;
 }
@@ -289,19 +298,21 @@ button {
 .product-detail img {
   width: 100%;
 }
+
 /* newsLetter*/
-.newsletterSignUp{
+.newsletterSignUp {
   text-align: center;
   border: #f0a868 solid 2px;
   margin: 2rem;
   padding-bottom: 1rem;
- }
- .newsletterSignUp form{
-   text-align: left;
-   margin: auto;
-   line-height: 2rem;
-   margin-left: 12px;
- }
+}
+
+.newsletterSignUp form {
+  text-align: left;
+  margin: auto;
+  line-height: 2rem;
+  margin-left: 12px;
+}
 
 /* Start cart list card styles */
 .cart-card {
