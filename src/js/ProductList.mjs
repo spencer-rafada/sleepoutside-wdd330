@@ -7,9 +7,9 @@ export default class ProductListing {
 
   productCardTemplate(product) {
     return `<li class="product-card">
-        <a href="product_pages/index.html?product=${product.Id}">
+        <a href="../product_pages/index.html?product=${product.Id}">
         <img
-          src="${product.Image}"
+          src="${product.Images.PrimaryLarge}"
           alt="Image of ${product.Name} "
         />
         <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -19,10 +19,18 @@ export default class ProductListing {
       </li>`;
   }
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
 
     const filteredList = this.filterProduct(list);
+    this.renderProductCategory(this.category);
     this.renderList(filteredList);
+  }
+
+  renderProductCategory(category) {
+    document.querySelector(`.products h2`).innerHTML = "";
+    document.querySelector(
+      `.products h2`
+    ).innerHTML = `Top Products: ${category}`;
   }
 
   renderList(list) {

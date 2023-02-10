@@ -238,8 +238,49 @@ button {
   margin: auto;
 }
 
+/* Start of categories */
+.categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.category {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  transition: 0.3s transform;
+}
+
+.category:hover {
+  transform: scale(1.1);
+}
+
+.category img {
+  width: 100px;
+}
+
+.category a {
+  text-decoration: none;
+  color: var(--dark-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.category a:hover {
+  color: var(--primary-color);
+}
+
+/* end of categories */
+
 .products {
   padding: 0.5em;
+}
+
+.products h2 {
+  text-transform: capitalize;
 }
 
 .product-list {
@@ -289,19 +330,21 @@ button {
 .product-detail img {
   width: 100%;
 }
+
 /* newsLetter*/
-.newsletterSignUp{
+.newsletterSignUp {
   text-align: center;
   border: #f0a868 solid 2px;
   margin: 2rem;
   padding-bottom: 1rem;
- }
- .newsletterSignUp form{
-   text-align: left;
-   margin: auto;
-   line-height: 2rem;
-   margin-left: 12px;
- }
+}
+
+.newsletterSignUp form {
+  text-align: left;
+  margin: auto;
+  line-height: 2rem;
+  margin-left: 12px;
+}
 
 /* Start cart list card styles */
 .cart-card {

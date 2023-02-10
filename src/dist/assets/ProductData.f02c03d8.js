@@ -1,0 +1,1 @@
+import{c}from"./utils.f6d0183f.js";const s="https://wdd330-backend.onrender.com/";class n{async getData(t){const a=await fetch(s+`products/search/${t}`);return(await c(a)).Result}async getProduct(t){const a=await fetch(s+`product/${t}`);return(await c(a)).Result}async findProductById(t){return await this.getProduct(t)}}export{n as P};

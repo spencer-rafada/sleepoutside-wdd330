@@ -1,51 +1,4 @@
-import {
-  setLocalStorage,
-  getLocalStorage,
-  renderWithTemplate,
-} from "./utils.mjs";
-
-export default class ProductDetails {
-  constructor(productId, dataSource) {
-    this.productId = productId;
-    this.dataSource = dataSource;
-    this.product = {};
-    this.products =
-      getLocalStorage(`so-cart`) === null ? [] : getLocalStorage(`so-cart`);
-    this.init();
-  }
-
-  async init() {
-    this.product = await this.dataSource.findProductById(this.productId);
-    document.querySelector(`.product-detail`).innerHTML =
-      this.renderProductDetails(this.product);
-    // add listener to Add to Cart button
-    document
-      .getElementById("addToCart")
-      .addEventListener("click", this.addToCart.bind(this));
-  }
-
-  renderBagAnimation(data) {
-    document.querySelector(data).setAttribute(`class`, `shake`);
-    setTimeout(() => {
-      document.querySelector(data).classList.remove(`shake`);
-    }, 2000);
-  }
-
-  // add to cart button event handler
-  addToCart(e) {
-    this.products = [...this.products, this.product];
-    setLocalStorage("so-cart", this.products);
-    const bagParent = document.querySelector(`.cart a`);
-    renderWithTemplate(
-      this.bagTemplate(),
-      bagParent,
-      `.cart svg`,
-      this.renderBagAnimation
-    );
-  }
-
-  bagTemplate() {
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+import{g as a,s as c,r,a as o,l as i}from"./utils.f6d0183f.js";import{P as s}from"./ProductData.f02c03d8.js";class d{constructor(t,e){this.productId=t,this.dataSource=e,this.product={},this.products=a("so-cart")===null?[]:a("so-cart"),this.init()}async init(){this.product=await this.dataSource.findProductById(this.productId),document.querySelector(".product-detail").innerHTML=this.renderProductDetails(this.product),document.getElementById("addToCart").addEventListener("click",this.addToCart.bind(this))}renderBagAnimation(t){document.querySelector(t).setAttribute("class","shake"),setTimeout(()=>{document.querySelector(t).classList.remove("shake")},2e3)}addToCart(t){this.products=[...this.products,this.product],c("so-cart",this.products);const e=document.querySelector(".cart a");r(this.bagTemplate(),e,".cart svg",this.renderBagAnimation)}bagTemplate(){return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <path
       d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6 3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3 2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2 2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7 -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0C15.6 6.2 14.9 23.6 18.9 32.6z"
     />
@@ -67,33 +20,26 @@ export default class ProductDetails {
 
     <!-- <text x="0" y="115" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">Created by Natalia Woodroffe</text>
       <text x="0" y="120" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project</text> -->
-  </svg>`;
-  }
+  </svg>`}renderProductDetails(t){return`
+      <h3>${t.Brand.Name}</h3>
 
-  renderProductDetails(product) {
-    const newItem = `
-      <h3>${product.Brand.Name}</h3>
-
-      <h2 class="divider">${product.NameWithoutBrand}</h2>
+      <h2 class="divider">${t.NameWithoutBrand}</h2>
 
       <img
         class="divider"
-        src="${product.Images.PrimaryLarge}"
-        alt="${product.Name}"
+        src="${t.Images.PrimaryLarge}"
+        alt="${t.Name}"
       />
 
       <h3 class="product-card__markup">$${this.product.SuggestedRetailPrice}</h3>
       <h2 class="product-card__price">$${this.product.FinalPrice}</h2>
 
-      <p class="product__color">${product.Colors[0].ColorName}</p>
+      <p class="product__color">${t.Colors[0].ColorName}</p>
 
       <p class="product__description">
-        ${product.DescriptionHtmlSimple}
+        ${t.DescriptionHtmlSimple}
       </p>
 
       <div class="product-detail__add">
-        <button id="addToCart" data-id=${product.Id}>Add to Cart</button>
-      </div>`;
-    return newItem;
-  }
-}
+        <button id="addToCart" data-id=${t.Id}>Add to Cart</button>
+      </div>`}}const l=o("product"),n=new s,h=new d(l,n);h.init();i();
