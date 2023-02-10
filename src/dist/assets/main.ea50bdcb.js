@@ -1,1 +1,0 @@
-import{l as t}from"./utils.f6d0183f.js";import{P as o}from"./ProductData.f02c03d8.js";import{A as r,P as e}from"./Alert.430e1eff.js";new r;const s=new o,c=document.querySelector(".product-list"),n=new e("tents",s,c);n.init();t();
