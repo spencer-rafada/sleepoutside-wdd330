@@ -1,1 +1,0 @@
-import{r as a}from"./utils.73518eb2.js";class c{constructor(t){this.category=t,this.path=`../json/${this.category}.json`}getData(){return fetch(this.path).then(a).then(t=>t)}async findProductById(t){return(await this.getData()).find(r=>r.Id===t)}}export{c as P};
