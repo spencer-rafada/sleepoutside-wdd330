@@ -31,16 +31,22 @@ export default class ProductDetails {
     }, 2000);
   }
 
+  renderSuperscript(productList){
+    document.getElementById('total').innerHTML = productList.length
+  }
+
   // add to cart button event handler
   addToCart(e) {
     this.products = [...this.products, this.product];
     setLocalStorage("so-cart", this.products);
+    const badge = this.renderSuperscript(this.products);
     const bagParent = document.querySelector(`.cart a`);
     renderWithTemplate(
       this.bagTemplate(),
       bagParent,
       `.cart svg`,
-      this.renderBagAnimation
+      this.renderBagAnimation,
+      badge
     );
   }
 

@@ -137,6 +137,19 @@ button {
   animation: slide-out 0.5s forwards;
 }
 
+#total{
+  font-size: .6rem;
+  position: absolute;
+  top: -1px;
+  right: -3px;
+  width: 15px;
+  height: 15px;
+  color: black;
+  background-color: #f0a868;
+  border-radius: 50%;
+  padding-top: 9%;
+}
+
 @keyframes slide-in {
   90% {
     transform: translateY(10%);
