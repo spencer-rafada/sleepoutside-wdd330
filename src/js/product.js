@@ -7,4 +7,4 @@ const dataSource = new ProductData();
 
 const product = new ProductDetails(productId, dataSource);
 product.init();
-loadHeaderFooter("../public/partials/");
+loadHeaderFooter("../partials/");

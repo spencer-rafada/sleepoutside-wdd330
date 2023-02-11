@@ -3,5 +3,5 @@ import ShoppingCart from "./ShoppingCart.mjs";
 
 // Render Items for the first load
 const shoppingCart = new ShoppingCart(`.product-list`, `so-cart`);
-loadHeaderFooter("../public/partials/");
+loadHeaderFooter("../partials/");
 shoppingCart.init();
