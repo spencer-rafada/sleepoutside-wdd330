@@ -15,7 +15,7 @@ export default class ProductListing {
         <h3 class="card__brand">${product.Brand.Name}</h3>
         <h2 class="card__name">${product.Name}</h2>
         <p class="product-card__markup">$${product.SuggestedRetailPrice}</p>
-        <h3 class="product-card__price">${product.FinalPrice}</h3></a>
+        <h3 class="product-card__price">$${product.FinalPrice}</h3></a>
       </li>`;
   }
   async init() {
