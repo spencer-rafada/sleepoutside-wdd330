@@ -3,7 +3,7 @@ import ProductListing from "./ProductList.mjs";
 import Alert from "./Alert.js";
 import { loadHeaderFooter, getParams } from "./utils.mjs";
 
-loadHeaderFooter();
+loadHeaderFooter("../public/partials/");
 
 const alerts = new Alert();
 const category = getParams(`category`);

@@ -10,4 +10,4 @@ const productListElement = document.querySelector(".product-list");
 const productList = new ProductListing("tents", dataSource, productListElement);
 
 productList.init();
-loadHeaderFooter();
+loadHeaderFooter("./partials/");
