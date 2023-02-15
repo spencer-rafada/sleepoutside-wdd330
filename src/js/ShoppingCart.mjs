@@ -21,7 +21,7 @@ export default class ShoppingCart {
     var footer = document.getElementById("cart-footer");
     footer.classList.toggle("hide");
     var cartTotal = document.querySelector(".cart-total");
-    cartTotal.innerHTML = `Total: $${total}`; //Show the total price
+    cartTotal.innerHTML = `Total: $${total.toFixed(2)}`; //Show the total price
   }
 
   // function that has an arry with the info from local storage
