@@ -53,6 +53,22 @@ async function loadTemplate(path) {
   return template;
 }
 
+async function banner() {
+  let currentDay = new Date();
+  const pthing = document.querySelector(".register")
+  let lastVisitString = window.localStorage.getItem("last-visit");
+  if (lastVisitString != null){
+    pthing.style.display='none'
+  }
+  window.localStorage.setItem("last-visit", currentDay.toString());
+}
+
+function renderSuperscript(productList){
+  // const productList = getLocalStorage(`so-cart`);
+  // document.getElementById('total').innerHTML = productList.length;
+  
+}
+
 export async function loadHeaderFooter(location) {
   const footer = await loadTemplate(location + `footer.html`);
   const header = await loadTemplate(location + `header.html`);
@@ -60,4 +76,7 @@ export async function loadHeaderFooter(location) {
   const headerElement = document.querySelector("header");
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
+  renderWithTemplate(banner());
+  renderWithTemplate(renderSuperscript())
 }
+
