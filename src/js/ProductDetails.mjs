@@ -9,8 +9,6 @@ export default class ProductDetails {
     this.productId = productId;
     this.dataSource = dataSource;
     this.product = {};
-    this.products =
-      getLocalStorage(`so-cart`) === null ? [] : getLocalStorage(`so-cart`);
     this.init();
   }
 
@@ -31,16 +29,36 @@ export default class ProductDetails {
     }, 2000);
   }
 
-  renderSuperscript(productList){
-    document.getElementById('total').innerHTML = productList.length
+  renderSuperscript(productList) {
+    document.getElementById("total").innerHTML = productList.length;
   }
 
   // add to cart button event handler
   addToCart(e) {
-    this.products = [...this.products, this.product];
-    setLocalStorage("so-cart", this.products);
+    // Get from storage - this.products
+    this.products =
+      getLocalStorage(`so-cart`) === null ? [] : getLocalStorage(`so-cart`);
+    // Check if item is in this.products
+    if (this.products.find((item) => item.Id === this.product.Id)) {
+      // If it is in this.products, add qty + 1
+      this.products.map((item) => {
+        if (item.Id === this.product.Id) {
+          item.Quantity += 1;
+        }
+        return item;
+      });
+    } else {
+      // else: add qty key
+      const prod = { ...this.product, Quantity: 1 };
+      this.products = [...this.products, prod];
+    }
+    // Set local storage
+    setLocalStorage(`so-cart`, this.products);
+
     const badge = this.renderSuperscript(this.products);
     const bagParent = document.querySelector(`.cart a`);
+
+    // Animation
     renderWithTemplate(
       this.bagTemplate(),
       bagParent,

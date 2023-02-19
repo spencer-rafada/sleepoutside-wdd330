@@ -15,8 +15,9 @@ export default class ShoppingCart {
     var total = 0;
     //loop through all items in cart and add prices
     for (let i = 0; i < cartItems.length; i++) {
-      total += cartItems[i].FinalPrice;
+      total += cartItems[i].FinalPrice * cartItems[i].Quantity;
     }
+
     //Show the footer (we have items in our cart)
     var footer = document.getElementById("cart-footer");
     footer.classList.toggle("hide");
@@ -55,7 +56,7 @@ export default class ShoppingCart {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__quantity">qty: ${item.Quantity}</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
     <span class="cart-card__remove" data-id=${item.Id}>X</span>
   </li>`;

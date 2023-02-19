@@ -7,7 +7,6 @@ loadHeaderFooter("../partials/");
 
 const alerts = new Alert();
 const category = getParams(`category`);
-console.log(category);
 
 const dataSource = new ProductData();
 const productListElement = document.querySelector(".product-list");
