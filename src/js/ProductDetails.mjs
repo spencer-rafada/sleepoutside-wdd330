@@ -62,9 +62,9 @@ export default class ProductDetails {
     renderWithTemplate(
       this.bagTemplate(),
       bagParent,
+      "afterbegin",
       `.cart svg`,
-      this.renderBagAnimation,
-      badge
+      this.renderBagAnimation
     );
   }
 
