@@ -37,9 +37,7 @@ export default class ShoppingCart {
 
     // Remove item event handler
     document.querySelectorAll(`[data-id]`).forEach((item) => {
-      item.addEventListener(`click`, () => {
-        item.remove();
-      });
+      item.addEventListener(`click`, this.removeClickedHandler);
     });
     // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
   }
@@ -65,7 +63,7 @@ export default class ShoppingCart {
   // Event Handler for clicking remove from cart
   removeClickedHandler(event) {
     const selectId = event.target;
-    console.log(this.cartItems);
+    console.log(selectId.dataset.id);
     const holder = this.cartItems.filter(
       (item) => item.Id !== selectId.dataset.id
     );
