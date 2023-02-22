@@ -45,11 +45,12 @@ export default class ProductListing {
   }
   // searchinh for a product and displaying
   async searchProduct(key) {
+    const searchInstert = document.querySelector("#search-products");
+    searchInstert.innerHTML = "";
     const list = await this.dataSource.getData(this.category);
     const filteredList = this.filterProduct(list);
     const products = filteredList.filter(item => item.Name.toLowerCase().includes(key.toLowerCase()));
     const render = products.map(this.productCardTemplate);
-    const searchInstert = document.querySelector("#search-products");
     searchInstert.insertAdjacentHTML("afterbegin", render.join(""));
   }
 
