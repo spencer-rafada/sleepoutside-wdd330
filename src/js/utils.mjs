@@ -55,18 +55,17 @@ async function loadTemplate(path) {
 
 async function banner() {
   let currentDay = new Date();
-  const pthing = document.querySelector(".register")
+  const pthing = document.querySelector(".register");
   let lastVisitString = window.localStorage.getItem("last-visit");
-  if (lastVisitString != null){
-    pthing.style.display='none'
+  if (lastVisitString != null) {
+    pthing.style.display = "none";
   }
   window.localStorage.setItem("last-visit", currentDay.toString());
 }
 
-function renderSuperscript(productList){
+function renderSuperscript(productList) {
   // const productList = getLocalStorage(`so-cart`);
   // document.getElementById('total').innerHTML = productList.length;
-  
 }
 
 export async function loadHeaderFooter(location) {
@@ -77,6 +76,5 @@ export async function loadHeaderFooter(location) {
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
   renderWithTemplate(banner());
-  renderWithTemplate(renderSuperscript())
+  renderWithTemplate(renderSuperscript());
 }
-
