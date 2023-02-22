@@ -3,27 +3,27 @@ export default class ProductListing {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.mainElement = document.querySelector("main");
   }
 
-  productCardTemplate(product) {
-    return `<li class="product-card">
-        <a href="../product_pages/index.html?product=${product.Id}">
-        <img
-          src="${product.Images.PrimaryLarge}"
-          alt="Image of ${product.Name} "
-        />
-        <h3 class="card__brand">${product.Brand.Name}</h3>
-        <h2 class="card__name">${product.Name}</h2>
-        <p class="product-card__markup">$${product.SuggestedRetailPrice}</p>
-        <h3 class="product-card__price">${product.FinalPrice}</h3></a>
-      </li>`;
-  }
   async init() {
     const list = await this.dataSource.getData(this.category);
 
-    const filteredList = this.filterProduct(list);
+    this.filteredList = this.filterProduct(list);
     this.renderProductCategory(this.category);
-    this.renderList(filteredList);
+    this.renderList(this.filteredList);
+
+    // Add Event Listeners for each button
+    document.querySelectorAll(`.lookup-button`).forEach((product) => {
+      product.addEventListener(`click`, () =>
+        this.showModal(product.dataset.id)
+      );
+    });
+
+    document.getElementById(`remove-modal`).addEventListener(`click`, () => {
+      alert("Test");
+      // TODO: add event listener for removing modal
+    });
   }
 
   renderProductCategory(category) {
@@ -42,5 +42,40 @@ export default class ProductListing {
     return productList.filter(
       (product) => product.Id != "989CG" && product.Id != "880RT"
     );
+  }
+
+  showModal(productId) {
+    const item = this.filteredList.filter(
+      (product) => product.Id === productId
+    );
+    this.mainElement.insertAdjacentHTML(
+      `beforebegin`,
+      this.productCardModal(item[0])
+    );
+  }
+
+  productCardTemplate(product) {
+    return `<li class="product-card">
+            <a href="../product_pages/index.html?product=${product.Id}">
+            <img
+              src="${product.Images.PrimaryLarge}"
+              alt="Image of ${product.Name} "
+            />
+            <h3 class="card__brand">${product.Brand.Name}</h3>
+            <h2 class="card__name">${product.Name}</h2>
+            <p class="product-card__markup">$${product.SuggestedRetailPrice}</p>
+            <h3 class="product-card__price">$${product.FinalPrice}</h3>
+            </a>
+            <button class="lookup-button" data-id="${product.Id}">Click Me</button>
+          </li>`;
+  }
+
+  productCardModal(product) {
+    return `<div class="product-bg">
+    <div class="product-modal">
+    <button id="remove-modal">X</button>
+    <h1>${product.Brand.Name}</h1>
+    </div>
+    </div>`;
   }
 }
