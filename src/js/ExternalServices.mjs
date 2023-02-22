@@ -18,10 +18,13 @@ export default class ExternalServices {
     return product;
   }
   async submitOrder(data) {
-    const response = await fetch(`${url}/checkout`, {
+    const options = {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
-    });
-    return response.json();
+    };
+    return await fetch(baseURL + `checkout`, options).then(convertToJson);
   }
 }

@@ -11,6 +11,7 @@ const externalServices = new ExternalServices();
 
 const checkout = new CheckoutDetails(summary, form);
 
-document.querySelector(`button`).addEventListener("click", () => {
-  externalServices.submitOrder();
+document.querySelector(`button`).addEventListener("click", (e) => {
+  e.preventDefault();
+  checkout.checkout();
 });

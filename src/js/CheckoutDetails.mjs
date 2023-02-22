@@ -1,4 +1,31 @@
 import { getLocalStorage, renderWithTemplate } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+
+const services = new ExternalServices();
+
+const packageItems = (items) => {
+  const product = items.map((item) => {
+    return {
+      id: item.Id,
+      price: item.FinalPrice,
+      name: item.Name,
+      quantity: item.Quantity,
+    };
+  });
+  return product;
+};
+
+const formDataToJSON = (formElement) => {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  console.log(formData);
+  formData.forEach((value, key) => {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+};
 
 export default class CheckoutDetails {
   constructor(summaryElement) {
@@ -37,6 +64,21 @@ export default class CheckoutDetails {
     }
     return shipping;
   }
+
+  async checkout() {
+    const formElement = document.forms["checkout"];
+    const json = formDataToJSON(formElement);
+    json.orderDate = new Date();
+    json.orderTotal = this.total;
+    json.tax = this.tax;
+    json.items = packageItems(this.cart);
+    try {
+      const res = await services.submitOrder(json);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   renderDetails() {
     return `<p>Item Subtotal(${this.quantity}): $${this.subTotal.toFixed(2)}</p>
     <p>Shipping Estimate: $${this.shipping.toFixed(2)}</p>
