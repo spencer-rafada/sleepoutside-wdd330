@@ -19,11 +19,6 @@ export default class ProductListing {
         this.showModal(product.dataset.id)
       );
     });
-
-    document.getElementById(`remove-modal`).addEventListener(`click`, () => {
-      alert("Test");
-      // TODO: add event listener for removing modal
-    });
   }
 
   renderProductCategory(category) {
@@ -52,6 +47,11 @@ export default class ProductListing {
       `beforebegin`,
       this.productCardModal(item[0])
     );
+    document.querySelector(`.product-bg`).addEventListener(`click`, () => {
+      // alert("Test");
+      // TODO: add event listener for removing modal
+      document.querySelector(`.product-bg`).remove();
+    });
   }
 
   productCardTemplate(product) {
@@ -66,15 +66,36 @@ export default class ProductListing {
             <p class="product-card__markup">$${product.SuggestedRetailPrice}</p>
             <h3 class="product-card__price">$${product.FinalPrice}</h3>
             </a>
-            <button class="lookup-button" data-id="${product.Id}">Click Me</button>
+            <button class="lookup-button" data-id="${product.Id}">Look Up</button>
           </li>`;
   }
 
   productCardModal(product) {
     return `<div class="product-bg">
     <div class="product-modal">
-    <button id="remove-modal">X</button>
+    <div>
     <h1>${product.Brand.Name}</h1>
+    <a href="../product_pages/index.html?product=${product.Id}">More details</a>
+    </div>
+    <div>
+    <picture>
+    <source media="(min-width: 650px) and (max-width: 899px)" srcset="${product.Images.PrimaryLarge}">
+    <source media="(min-width: 900px)" srcset="${product.Images.PrimaryExtraLarge}">
+    <img
+    class="divider"
+    src="${product.Images.PrimaryMedium}"
+    alt="${product.Name}"
+    />
+    </picture>
+    <h3 class="product-card__markup">$${product.SuggestedRetailPrice}</h3>
+    <h2 class="product-card__price">$${product.FinalPrice}</h2>
+    
+    <p class="product__color">${product.Colors[0].ColorName}</p>
+    
+    <p class="product__description">
+    ${product.DescriptionHtmlSimple}
+    </p>
+    </div>
     </div>
     </div>`;
   }

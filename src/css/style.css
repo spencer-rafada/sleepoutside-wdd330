@@ -201,6 +201,10 @@ button {
 
 .product-modal {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 101;
+  padding: 1rem;
   width: 60%;
   height: 50%;
   margin: 0 auto;
@@ -208,6 +212,14 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.product-modal h1 {
+  margin: 0 auto;
+}
+
+.product-modal img {
+  width: 30%;
 }
 
 /* End of Look up Modal Styles */
