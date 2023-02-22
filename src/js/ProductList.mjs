@@ -8,10 +8,15 @@ export default class ProductListing {
   productCardTemplate(product) {
     return `<li class="product-card">
         <a href="../product_pages/index.html?product=${product.Id}">
+        <picture>
+        <source media="(min-width: 650px) and (max-width: 899px)" srcset="${product.Images.PrimaryLarge}">
+        <source media="(min-width: 900px)" srcset="${product.Images.PrimaryExtraLarge}">
         <img
-          src="${product.Images.PrimaryLarge}"
-          alt="Image of ${product.Name} "
+          class="divider"
+          src="${product.Images.PrimaryMedium}"
+          alt="${product.Name}"
         />
+      </picture>
         <h3 class="card__brand">${product.Brand.Name}</h3>
         <h2 class="card__name">${product.Name}</h2>
         <p class="product-card__markup">$${product.SuggestedRetailPrice}</p>
@@ -42,7 +47,7 @@ export default class ProductListing {
       (product) => product.Id != "989CG" && product.Id != "880RT"
     );
   }
-  // searchinh for a product and displaying
+  // searchinh for a product and displaying the results
   async searchProduct(key) {
     const searchInstert = document.querySelector("#search-products");
     searchInstert.innerHTML = "";
