@@ -31,8 +31,8 @@ export default class ProductDetails {
     }, 2000);
   }
 
-  renderSuperscript(productList){
-    document.getElementById('total').innerHTML = productList.length
+  renderSuperscript(productList) {
+    document.getElementById("total").innerHTML = productList.length;
   }
 
   // add to cart button event handler
@@ -82,11 +82,15 @@ export default class ProductDetails {
 
       <h2 class="divider">${product.NameWithoutBrand}</h2>
 
-      <img
-        class="divider"
-        src="${product.Images.PrimaryLarge}"
-        alt="${product.Name}"
-      />
+      <picture>
+        <source media="(min-width: 650px) and (max-width: 899px)" srcset="${product.Images.PrimaryLarge}">
+        <source media="(min-width: 900px)" srcset="${product.Images.PrimaryExtraLarge}">
+        <img
+          class="divider"
+          src="${product.Images.PrimaryMedium}"
+          alt="${product.Name}"
+        />
+      </picture>
 
       <h3 class="product-card__markup">$${this.product.SuggestedRetailPrice}</h3>
       <h2 class="product-card__price">$${this.product.FinalPrice}</h2>
