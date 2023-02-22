@@ -348,6 +348,28 @@ button {
   font-size: 1em;
 }
 
+/*Search form*/
+input{
+  width: 100%;
+  border: 3px solid var(--primary-color);
+  padding: 5px;
+  height: 40px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+  margin-top: 10px;
+}
+#search-products{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+}
+#search-cont{
+  border-bottom: 2px solid var(--primary-color);
+}
+
 /* End product list card */
 
 .product-detail {

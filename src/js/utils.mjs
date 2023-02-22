@@ -69,9 +69,17 @@ async function banner() {
   window.localStorage.setItem("last-visit", currentDay.toString());
 }
 
+import ShoppingCart from "./ShoppingCart.mjs";
+
+const shoppingCart = new ShoppingCart(null, `so-cart`);
+
 function renderSuperscript(productList) {
   // const productList = getLocalStorage(`so-cart`);
-  // document.getElementById('total').innerHTML = productList.length;
+  var items = 0;
+  shoppingCart.cartItems.forEach((item) => {
+    items += item.Quantity;
+  });
+  console.log(items);
 }
 
 export async function loadHeaderFooter(location) {
@@ -82,5 +90,6 @@ export async function loadHeaderFooter(location) {
 
   renderWithTemplate(header, headerElement, "afterbegin");
   renderWithTemplate(footer, footerElement, "afterbegin");
+  renderSuperscript();
   renderWithTemplate(banner());
 }
