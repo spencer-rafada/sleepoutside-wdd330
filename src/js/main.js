@@ -10,4 +10,10 @@ const productListElement = document.querySelector(".product-list");
 const productList = new ProductListing("tents", dataSource, productListElement);
 
 productList.init();
+// calling the search product function from main page as well
+document.querySelector('.search-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const value = document.querySelector('#query').value;
+    productList.searchProduct(value);
+  });
 loadHeaderFooter("./partials/");
