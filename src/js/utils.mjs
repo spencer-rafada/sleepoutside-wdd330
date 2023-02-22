@@ -14,9 +14,15 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function renderWithTemplate(template, parentElement, data, callback) {
+export function renderWithTemplate(
+  template,
+  parentElement,
+  position,
+  data,
+  callback
+) {
   parentElement.innerHTML = ``;
-  parentElement.insertAdjacentHTML("afterbegin", template);
+  parentElement.insertAdjacentHTML(position, template);
   if (callback) {
     callback(data);
   }
@@ -73,8 +79,8 @@ export async function loadHeaderFooter(location) {
   const header = await loadTemplate(location + `header.html`);
   const footerElement = document.querySelector("footer");
   const headerElement = document.querySelector("header");
-  renderWithTemplate(header, headerElement);
-  renderWithTemplate(footer, footerElement);
+
+  renderWithTemplate(header, headerElement, "afterbegin");
+  renderWithTemplate(footer, footerElement, "afterbegin");
   renderWithTemplate(banner());
-  renderWithTemplate(renderSuperscript());
 }
