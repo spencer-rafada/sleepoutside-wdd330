@@ -6,10 +6,12 @@ export default class ProductListing {
     this.mainElement = document.querySelector("main");
   }
 
+
   async init() {
     const list = await this.dataSource.getData(this.category);
 
     this.filteredList = this.filterProduct(list);
+
     this.renderProductCategory(this.category);
     this.renderList(this.filteredList);
 
@@ -38,6 +40,7 @@ export default class ProductListing {
       (product) => product.Id != "989CG" && product.Id != "880RT"
     );
   }
+
 
   showModal(productId) {
     const item = this.filteredList.filter(
