@@ -8,7 +8,7 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
 
     <script src="../js/checkout.js" type="module"></script>
   </head>
@@ -19,6 +19,36 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form name="checkout">
+          <fieldset>
+            <legend>Shipping</legend>
+            <label for="firstName">First Name</label>
+            <input type="text"  name="fname" placeholder="Enter your first name" required></input>
+            <label for="lastName">Last Name</label>
+            <input type="text"  name="lname" placeholder="Enter your last name" required></input>
+            <label for="street">Street</label>
+            <input type="text"  name="street" placeholder="Enter your street address" required></input>
+            <label for="city">City</label>
+            <input type="text"  name="city" placeholder="Enter your city" required></input>
+            <label for="state">State</label>
+            <input type="text"  name="state" placeholder="Enter your state" required></input>
+            <label for="zip">ZIP</label>
+            <input type="text"  name="zip" placeholder="Enter your ZIP" required></input>
+          </fieldset>
+          <fieldset>
+            <legend>Payment</legend>
+            <label for="cardNumber">Card Number</label>
+            <input type="text"  name="cardNumber" placeholder="Enter your card number" required></input>
+            <label for="expiration">Expiration</label>
+            <input type="text"  name="expiration" placeholder="Enter your expiration" required></input>
+            <label for="securityCode">Security Code</label>
+            <input type="text"  name="code" placeholder="Enter your security code" required></input>
+          </fieldset>
+          <fieldset id="summary">
+            <legend>Order Summary</legend>
+          </fieldset>
+          <button type="submit">Checkout</button>
+        </form>
       </section>
     </main>
 

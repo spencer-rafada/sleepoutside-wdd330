@@ -15,13 +15,14 @@ export default class ShoppingCart {
     var total = 0;
     //loop through all items in cart and add prices
     for (let i = 0; i < cartItems.length; i++) {
-      total += cartItems[i].FinalPrice;
+      total += cartItems[i].FinalPrice * cartItems[i].Quantity;
     }
+
     //Show the footer (we have items in our cart)
     var footer = document.getElementById("cart-footer");
     footer.classList.toggle("hide");
     var cartTotal = document.querySelector(".cart-total");
-    cartTotal.innerHTML = `Total: $${total}`; //Show the total price
+    cartTotal.innerHTML = `Total: $${total.toFixed(2)}`; //Show the total price
   }
 
   // function that has an arry with the info from local storage
@@ -36,26 +37,29 @@ export default class ShoppingCart {
 
     // Remove item event handler
     document.querySelectorAll(`[data-id]`).forEach((item) => {
-      item.addEventListener(`click`, () => {
-        item.remove();
-      });
+      item.addEventListener(`click`, this.removeClickedHandler);
     });
     // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
   }
   // renders the items
   renderCartItem(item) {
     const newItem = `<li class="cart-card divider">
-    <a href="#" class="cart-card__image">
-      <img
-        src="${item.Image}"
-        alt="${item.Name}"
-      />
+    <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
+    <picture>
+    <source media="(min-width: 650px) and (max-width: 899px)" srcset="${item.Images.PrimaryLarge}">
+    <source media="(min-width: 900px)" srcset="${item.Images.PrimaryExtraLarge}">
+    <img
+      class="divider"
+      src="${item.Images.PrimaryMedium}"
+      alt="${item.Name}"
+    />
+  </picture>
     </a>
-    <a href="#">
+    <a href="/product_pages/index.html?product=${item.Id}">
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__quantity">qty: ${item.Quantity}</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
     <span class="cart-card__remove" data-id=${item.Id}>X</span>
   </li>`;
@@ -64,7 +68,7 @@ export default class ShoppingCart {
   // Event Handler for clicking remove from cart
   removeClickedHandler(event) {
     const selectId = event.target;
-    console.log(this.cartItems);
+    console.log(selectId.dataset.id);
     const holder = this.cartItems.filter(
       (item) => item.Id !== selectId.dataset.id
     );

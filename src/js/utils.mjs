@@ -14,9 +14,15 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function renderWithTemplate(template, parentElement, data, callback) {
+export function renderWithTemplate(
+  template,
+  parentElement,
+  position,
+  data,
+  callback
+) {
   parentElement.innerHTML = ``;
-  parentElement.insertAdjacentHTML("afterbegin", template);
+  parentElement.insertAdjacentHTML(position, template);
   if (callback) {
     callback(data);
   }
@@ -55,18 +61,17 @@ async function loadTemplate(path) {
 
 async function banner() {
   let currentDay = new Date();
-  const pthing = document.querySelector(".register")
+  const pthing = document.querySelector(".register");
   let lastVisitString = window.localStorage.getItem("last-visit");
-  if (lastVisitString != null){
-    pthing.style.display='none'
+  if (lastVisitString != null) {
+    pthing.style.display = "none";
   }
   window.localStorage.setItem("last-visit", currentDay.toString());
 }
 
-function renderSuperscript(productList){
+function renderSuperscript(productList) {
   // const productList = getLocalStorage(`so-cart`);
   // document.getElementById('total').innerHTML = productList.length;
-  
 }
 
 export async function loadHeaderFooter(location) {
@@ -74,9 +79,8 @@ export async function loadHeaderFooter(location) {
   const header = await loadTemplate(location + `header.html`);
   const footerElement = document.querySelector("footer");
   const headerElement = document.querySelector("header");
-  renderWithTemplate(header, headerElement);
-  renderWithTemplate(footer, footerElement);
-  renderWithTemplate(banner());
-  renderWithTemplate(renderSuperscript())
-}
 
+  renderWithTemplate(header, headerElement, "afterbegin");
+  renderWithTemplate(footer, footerElement, "afterbegin");
+  renderWithTemplate(banner());
+}
