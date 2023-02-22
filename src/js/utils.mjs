@@ -73,13 +73,13 @@ import ShoppingCart from "./ShoppingCart.mjs";
 
 const shoppingCart = new ShoppingCart(null, `so-cart`);
 
-function renderSuperscript(productList) {
+function renderSuperscript() {
   // const productList = getLocalStorage(`so-cart`);
   var items = 0;
   shoppingCart.cartItems.forEach((item) => {
     items += item.Quantity;
   });
-  console.log(items);
+  document.getElementById("total").innerHTML = items;
 }
 
 export async function loadHeaderFooter(location) {
