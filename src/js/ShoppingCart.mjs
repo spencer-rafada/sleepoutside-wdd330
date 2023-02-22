@@ -44,13 +44,18 @@ export default class ShoppingCart {
   // renders the items
   renderCartItem(item) {
     const newItem = `<li class="cart-card divider">
-    <a href="#" class="cart-card__image">
-      <img
-        src="${item.Image}"
-        alt="${item.Name}"
-      />
+    <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
+    <picture>
+    <source media="(min-width: 650px) and (max-width: 899px)" srcset="${item.Images.PrimaryLarge}">
+    <source media="(min-width: 900px)" srcset="${item.Images.PrimaryExtraLarge}">
+    <img
+      class="divider"
+      src="${item.Images.PrimaryMedium}"
+      alt="${item.Name}"
+    />
+  </picture>
     </a>
-    <a href="#">
+    <a href="/product_pages/index.html?product=${item.Id}">
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
