@@ -25,7 +25,6 @@ export default class ProductListing {
   }
   async init() {
     const list = await this.dataSource.getData(this.category);
-
     const filteredList = this.filterProduct(list);
     this.renderProductCategory(this.category);
     this.renderList(filteredList);
@@ -48,4 +47,15 @@ export default class ProductListing {
       (product) => product.Id != "989CG" && product.Id != "880RT"
     );
   }
+  // searchinh for a product and displaying
+  async searchProduct(key) {
+    const searchInstert = document.querySelector("#search-products");
+    searchInstert.innerHTML = "";
+    const list = await this.dataSource.getData(this.category);
+    const filteredList = this.filterProduct(list);
+    const products = filteredList.filter(item => item.Name.toLowerCase().includes(key.toLowerCase()));
+    const render = products.map(this.productCardTemplate);
+    searchInstert.insertAdjacentHTML("afterbegin", render.join(""));
+  }
+
 }

@@ -17,3 +17,10 @@ const productList = new ProductListing(
 );
 
 productList.init();
+
+//event listner for a search form
+document.querySelector('.search-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const value = document.querySelector('#query').value;
+  productList.searchProduct(value);
+});
