@@ -91,5 +91,5 @@ export async function loadHeaderFooter(location) {
   renderWithTemplate(header, headerElement, "afterbegin");
   renderWithTemplate(footer, footerElement, "afterbegin");
   renderSuperscript();
-  renderWithTemplate(banner());
+  banner();
 }
