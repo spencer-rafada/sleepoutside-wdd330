@@ -2,6 +2,7 @@ import {
   setLocalStorage,
   getLocalStorage,
   renderWithTemplate,
+  alertMessage,
 } from "./utils.mjs";
 
 export default class ProductDetails {
@@ -57,6 +58,8 @@ export default class ProductDetails {
 
     const badge = this.renderSuperscript(this.products);
     const bagParent = document.querySelector(`.cart a`);
+
+    alertMessage("Successfully added to cart.", "success");
 
     // Animation
     renderWithTemplate(

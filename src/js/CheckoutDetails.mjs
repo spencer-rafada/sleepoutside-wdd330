@@ -1,4 +1,10 @@
-import { getLocalStorage, renderWithTemplate } from "./utils.mjs";
+import {
+  alertMessage,
+  getLocalStorage,
+  removeAllAlert,
+  renderWithTemplate,
+  setLocalStorage,
+} from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -19,7 +25,6 @@ const formDataToJSON = (formElement) => {
   const formData = new FormData(formElement),
     convertedJSON = {};
 
-  console.log(formData);
   formData.forEach((value, key) => {
     convertedJSON[key] = value;
   });
@@ -74,8 +79,13 @@ export default class CheckoutDetails {
     json.items = packageItems(this.cart);
     try {
       const res = await services.submitOrder(json);
+      setLocalStorage(`so-cart`, []);
+      location.href = "success.html";
     } catch (err) {
-      console.log(err);
+      removeAllAlert();
+      for (let message in err.message) {
+        alertMessage(err.message[message], `error`);
+      }
     }
   }
 

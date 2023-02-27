@@ -45,11 +45,12 @@ export const getParams = (param) => {
 };
 
 // converting to json
-export function convertToJson(res) {
+export async function convertToJson(res) {
+  const response = await res.json();
   if (res.ok) {
-    return res.json();
+    return response;
   } else {
-    throw new Error("Bad Response");
+    throw { name: `servicesError`, message: response };
   }
 }
 
@@ -92,4 +93,27 @@ export async function loadHeaderFooter(location) {
   renderWithTemplate(footer, footerElement, "afterbegin");
   renderSuperscript();
   banner();
+}
+
+export function alertMessage(message, alertType, scroll = true) {
+  const alert = document.createElement(`div`);
+  alert.classList.add(`alert`);
+  alert.classList.add(`${alertType}`);
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener(`click`, (e) => {
+    if (e.target.tagName === "SPAN") {
+      main.removeChild(alert);
+    }
+  });
+  const main = document.querySelector(`main`);
+  main.prepend(alert);
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
+}
+
+export function removeAllAlert() {
+  const alerts = document.querySelectorAll(`.alert`);
+  alerts.forEach((alert) => document.querySelector(`main`).removeChild(alert));
 }
