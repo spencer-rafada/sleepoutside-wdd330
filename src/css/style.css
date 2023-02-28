@@ -138,6 +138,33 @@ button {
   animation: slide-out 0.5s forwards;
 }
 
+main .alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid 2px black;
+  margin: 1rem;
+}
+
+main .alert.error {
+  background-color: orange;
+}
+
+main .alert.success {
+  background-color: green;
+  color: white;
+}
+
+main .alert p {
+  display: inline;
+  margin: 0;
+}
+
+main .alert span {
+  cursor: pointer;
+  color: red;
+}
+
 #total {
   font-size: .6rem;
   position: absolute;
@@ -386,7 +413,7 @@ button {
 }
 
 /*Search form*/
-input{
+input {
   width: 100%;
   border: 3px solid var(--primary-color);
   padding: 5px;
@@ -396,14 +423,16 @@ input{
   color: #9DBFAF;
   margin-top: 10px;
 }
-#search-products{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
+
+#search-products {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
 }
-#search-cont{
+
+#search-cont {
   border-bottom: 2px solid var(--primary-color);
 }
 
