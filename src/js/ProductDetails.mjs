@@ -17,6 +17,10 @@ export default class ProductDetails {
     this.product = await this.dataSource.findProductById(this.productId);
     document.querySelector(`.product-detail`).innerHTML =
       this.renderProductDetails(this.product);
+
+    document.querySelector(`.product-card__carousel`).innerHTML =
+      this.renderCarousel(this.product);
+
     // add listener to Add to Cart button
     document
       .getElementById("addToCart")
@@ -113,6 +117,9 @@ export default class ProductDetails {
         />
       </picture>
 
+      <div class="divider product-card__carousel">
+      </div>
+
       <h3 class="product-card__markup">$${this.product.SuggestedRetailPrice}</h3>
       <h2 class="product-card__price">$${this.product.FinalPrice}</h2>
 
@@ -126,5 +133,19 @@ export default class ProductDetails {
         <button id="addToCart" data-id=${product.Id}>Add to Cart</button>
       </div>`;
     return newItem;
+  }
+
+  renderCarousel(product) {
+    const images = product.Images.ExtraImages;
+    const section = document.createElement(`section`);
+    images.forEach((item) => {
+      const image = document.createElement(`div`);
+      image.setAttribute("class", "product-card__carousel-image");
+      image.innerHTML = `
+      <img src="${item.Src}" alt="${item.Title}">
+      `;
+      section.appendChild(image);
+    });
+    return section.innerHTML;
   }
 }
