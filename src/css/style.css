@@ -398,6 +398,25 @@ main .alert span {
   max-width: 250px;
 }
 
+.product-card__carousel {
+  height: 10rem;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 1rem;
+}
+
+.product-card__carousel-image {
+  border: solid 1px var(--primary-color);
+  padding: 1rem;
+  margin-right: 1rem;
+}
+
+.product-card__carousel-image img {
+  height: 100%;
+}
+
 .product-card h2,
 .product-card h3,
 .product-card p {
