@@ -75,7 +75,6 @@ export default class ShoppingCart {
   // Event Handler for clicking remove from cart
   removeClickedHandler(event) {
     const selectId = event.target;
-    console.log(selectId.dataset.id);
     const holder = this.cartItems.filter(
       (item) => item.Id !== selectId.dataset.id
     );
@@ -88,7 +87,6 @@ export default class ShoppingCart {
     const inputId = event.target;
     // Remove if empty
     if ((inputId.value === "") | (inputId.value === "0")) {
-      console.log("HI");
       const newCart = this.cartItems.filter(
         (item) => item.Id !== inputId.dataset.button
       );
