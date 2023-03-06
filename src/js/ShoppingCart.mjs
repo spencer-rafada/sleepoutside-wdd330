@@ -35,9 +35,14 @@ export default class ShoppingCart {
       document.querySelector(this.listElement).innerHTML = htmlItems.join("");
     }
 
+    // Input Change Listener
+    document.querySelectorAll(`[data-button]`).forEach((item) => {
+      item.addEventListener(`change`, (e) => this.handleQuantityChange(e));
+    });
+
     // Remove item event handler
     document.querySelectorAll(`[data-id]`).forEach((item) => {
-      item.addEventListener(`click`, this.removeClickedHandler);
+      item.addEventListener(`click`, (e) => this.removeClickedHandler(e));
     });
     // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
   }
@@ -59,7 +64,9 @@ export default class ShoppingCart {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: ${item.Quantity}</p>
+    <p class="cart-card__quantity">qty: 
+      <input data-button="${item.Id}" value="${item.Quantity}" type="number" min="0" oninput="validity.valid||(value='');">
+    </p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
     <span class="cart-card__remove" data-id=${item.Id}>Remove From Cart</span>
   </li>`;
@@ -68,10 +75,31 @@ export default class ShoppingCart {
   // Event Handler for clicking remove from cart
   removeClickedHandler(event) {
     const selectId = event.target;
-    console.log(selectId.dataset.id);
     const holder = this.cartItems.filter(
       (item) => item.Id !== selectId.dataset.id
     );
     setLocalStorage(this.key, holder);
+    location.reload();
+  }
+
+  // Event Handler for Inputs
+  handleQuantityChange(event) {
+    const inputId = event.target;
+    // Remove if empty
+    if ((inputId.value === "") | (inputId.value === "0")) {
+      const newCart = this.cartItems.filter(
+        (item) => item.Id !== inputId.dataset.button
+      );
+      setLocalStorage(this.key, newCart);
+    } else {
+      // else Change quantity
+      this.cartItems.forEach((item) => {
+        if (item.Id === inputId.dataset.button) {
+          item["Quantity"] = inputId.value;
+        }
+      });
+      setLocalStorage(this.key, this.cartItems);
+    }
+    location.reload();
   }
 }
