@@ -15,6 +15,7 @@ export default class ProductDetails {
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
+    console.log(this.product);
     document.querySelector(`.product-detail`).innerHTML =
       this.renderProductDetails(this.product);
 
@@ -25,6 +26,29 @@ export default class ProductDetails {
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addToCart.bind(this));
+
+    // add listener for images
+    document.querySelectorAll("[data-src]").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log("Hi");
+        // switch
+        this.handleImageClick(item.dataset.src);
+      });
+    });
+  }
+
+  handleImageClick(data) {
+    // get all source
+    const sourcesets = document.querySelectorAll(`source`);
+    // crete handler for current mainImg's data-src
+    // switch images
+    document.querySelector(`.product-card__mainImg`).dataset.src = data;
+    document.querySelector(`.product-card__mainImg`).src = data;
+    // set source for sources
+    sourcesets.forEach((item) => {
+      item.srcset = data;
+    });
   }
 
   renderBagAnimation(data) {
@@ -111,9 +135,10 @@ export default class ProductDetails {
         <source media="(min-width: 650px) and (max-width: 899px)" srcset="${product.Images.PrimaryLarge}">
         <source media="(min-width: 900px)" srcset="${product.Images.PrimaryExtraLarge}">
         <img
-          class="divider"
+          class="divider product-card__mainImg"
           src="${product.Images.PrimaryMedium}"
           alt="${product.Name}"
+          data-src="${product.Images.PrimaryMedium}"
         />
       </picture>
 
@@ -138,13 +163,23 @@ export default class ProductDetails {
   renderCarousel(product) {
     const images = product.Images.ExtraImages;
     const section = document.createElement(`section`);
-    images.forEach((item) => {
-      const image = document.createElement(`div`);
-      image.setAttribute("class", "product-card__carousel-image");
-      image.innerHTML = `
-      <img src="${item.Src}" alt="${item.Title}">
+
+    // First Img
+    const firstImg = document.createElement(`div`);
+    firstImg.setAttribute("class", "product-card__carousel-image");
+    firstImg.innerHTML = `
+      <img src="${product.Images.PrimaryLarge}" alt="${product.Name}" data-src="${product.Images.PrimaryExtraLarge}">
       `;
-      section.appendChild(image);
+    section.appendChild(firstImg);
+
+    // Extra Images
+    images.forEach((item) => {
+      const imageDiv = document.createElement(`div`);
+      imageDiv.setAttribute("class", "product-card__carousel-image");
+      imageDiv.innerHTML = `
+      <img src="${item.Src}" alt="${item.Title}" data-src="${item.Src}">
+      `;
+      section.appendChild(imageDiv);
     });
     return section.innerHTML;
   }

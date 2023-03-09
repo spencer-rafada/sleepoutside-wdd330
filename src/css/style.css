@@ -399,7 +399,7 @@ main .alert span {
 }
 
 .product-card__carousel {
-  height: 10rem;
+  height: 8rem;
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
@@ -411,6 +411,7 @@ main .alert span {
   border: solid 1px var(--primary-color);
   padding: 1rem;
   margin-right: 1rem;
+  cursor: pointer;
 }
 
 .product-card__carousel-image img {
