@@ -27,24 +27,24 @@ export default class ExternalServices {
     };
     return await fetch(baseURL + `checkout`, options).then(convertToJson);
   }
-  async loginRequest(creds){
+  async loginRequest(creds) {
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(creds),
     };
     return await fetch(baseURL + `login`, options).then(convertToJson);
   }
 
-  async getOrders(token){
+  async getOrders(token) {
     const options = {
       method: "GET",
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
-    return await fetch(baseURL + `orders`, options);
+    return await fetch(baseURL + `orders`, options).then(convertToJson);
   }
 }
