@@ -22,6 +22,9 @@ export default class ProductDetails {
     document.querySelector(`.product-card__carousel`).innerHTML =
       this.renderCarousel(this.product);
 
+    document.querySelector(`.product-card__colors`).innerHTML =
+      this.renderColorSwitch(this.product);
+
     // add listener to Add to Cart button
     document
       .getElementById("addToCart")
@@ -64,11 +67,16 @@ export default class ProductDetails {
 
   // add to cart button event handler
   addToCart(e) {
+    const colorValue = document.querySelector(`select`).value;
     // Get from storage - this.products
     this.products =
       getLocalStorage(`so-cart`) === null ? [] : getLocalStorage(`so-cart`);
     // Check if item is in this.products
-    if (this.products.find((item) => item.Id === this.product.Id)) {
+    if (
+      this.products.find(
+        (item) => item.Id === this.product.Id && item.Colors === colorValue
+      )
+    ) {
       // If it is in this.products, add qty + 1
       this.products.map((item) => {
         if (item.Id === this.product.Id) {
@@ -78,7 +86,7 @@ export default class ProductDetails {
       });
     } else {
       // else: add qty key
-      const prod = { ...this.product, Quantity: 1 };
+      const prod = { ...this.product, Quantity: 1, Colors: colorValue };
       this.products = [...this.products, prod];
     }
     // Set local storage
@@ -145,6 +153,8 @@ export default class ProductDetails {
       <div class="divider product-card__carousel">
       </div>
 
+      <div class="divider product-card__colors"></div>
+
       <h3 class="product-card__markup">$${this.product.SuggestedRetailPrice}</h3>
       <h2 class="product-card__price">$${this.product.FinalPrice}</h2>
 
@@ -162,7 +172,7 @@ export default class ProductDetails {
 
   renderCarousel(product) {
     const images = product.Images.ExtraImages;
-    const section = document.createElement(`section`);
+    const section = document.createElement(`div`);
 
     // First Img
     const firstImg = document.createElement(`div`);
@@ -182,5 +192,20 @@ export default class ProductDetails {
       section.appendChild(imageDiv);
     });
     return section.innerHTML;
+  }
+
+  renderColorSwitch(product) {
+    const colors = product.Colors;
+    const tempDiv = document.createElement(`div`);
+    const select = document.createElement(`select`);
+    colors.forEach((item) => {
+      const option = document.createElement(`option`);
+      option.setAttribute(`value`, item.ColorName);
+      option.innerHTML = `${item.ColorName}`;
+      select.appendChild(option);
+    });
+
+    tempDiv.appendChild(select);
+    return tempDiv.innerHTML;
   }
 }
