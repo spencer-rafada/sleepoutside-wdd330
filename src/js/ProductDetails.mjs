@@ -15,16 +15,43 @@ export default class ProductDetails {
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
+    console.log(this.product);
     document.querySelector(`.product-detail`).innerHTML =
       this.renderProductDetails(this.product);
 
     document.querySelector(`.product-card__carousel`).innerHTML =
       this.renderCarousel(this.product);
 
+    document.querySelector(`.product-card__colors`).innerHTML =
+      this.renderColorSwitch(this.product);
+
     // add listener to Add to Cart button
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addToCart.bind(this));
+
+    // add listener for images
+    document.querySelectorAll("[data-src]").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log("Hi");
+        // switch
+        this.handleImageClick(item.dataset.src);
+      });
+    });
+  }
+
+  handleImageClick(data) {
+    // get all source
+    const sourcesets = document.querySelectorAll(`source`);
+    // crete handler for current mainImg's data-src
+    // switch images
+    document.querySelector(`.product-card__mainImg`).dataset.src = data;
+    document.querySelector(`.product-card__mainImg`).src = data;
+    // set source for sources
+    sourcesets.forEach((item) => {
+      item.srcset = data;
+    });
   }
 
   renderBagAnimation(data) {
@@ -40,11 +67,16 @@ export default class ProductDetails {
 
   // add to cart button event handler
   addToCart(e) {
+    const colorValue = document.querySelector(`select`).value;
     // Get from storage - this.products
     this.products =
       getLocalStorage(`so-cart`) === null ? [] : getLocalStorage(`so-cart`);
     // Check if item is in this.products
-    if (this.products.find((item) => item.Id === this.product.Id)) {
+    if (
+      this.products.find(
+        (item) => item.Id === this.product.Id && item.Colors === colorValue
+      )
+    ) {
       // If it is in this.products, add qty + 1
       this.products.map((item) => {
         if (item.Id === this.product.Id) {
@@ -54,7 +86,7 @@ export default class ProductDetails {
       });
     } else {
       // else: add qty key
-      const prod = { ...this.product, Quantity: 1 };
+      const prod = { ...this.product, Quantity: 1, Colors: colorValue };
       this.products = [...this.products, prod];
     }
     // Set local storage
@@ -111,14 +143,17 @@ export default class ProductDetails {
         <source media="(min-width: 650px) and (max-width: 899px)" srcset="${product.Images.PrimaryLarge}">
         <source media="(min-width: 900px)" srcset="${product.Images.PrimaryExtraLarge}">
         <img
-          class="divider"
+          class="divider product-card__mainImg"
           src="${product.Images.PrimaryMedium}"
           alt="${product.Name}"
+          data-src="${product.Images.PrimaryMedium}"
         />
       </picture>
 
       <div class="divider product-card__carousel">
       </div>
+
+      <div class="divider product-card__colors"></div>
 
       <h3 class="product-card__markup">$${this.product.SuggestedRetailPrice}</h3>
       <h2 class="product-card__price">$${this.product.FinalPrice}</h2>
@@ -137,15 +172,40 @@ export default class ProductDetails {
 
   renderCarousel(product) {
     const images = product.Images.ExtraImages;
-    const section = document.createElement(`section`);
-    images.forEach((item) => {
-      const image = document.createElement(`div`);
-      image.setAttribute("class", "product-card__carousel-image");
-      image.innerHTML = `
-      <img src="${item.Src}" alt="${item.Title}">
+    const section = document.createElement(`div`);
+
+    // First Img
+    const firstImg = document.createElement(`div`);
+    firstImg.setAttribute("class", "product-card__carousel-image");
+    firstImg.innerHTML = `
+      <img src="${product.Images.PrimaryLarge}" alt="${product.Name}" data-src="${product.Images.PrimaryExtraLarge}">
       `;
-      section.appendChild(image);
+    section.appendChild(firstImg);
+
+    // Extra Images
+    images.forEach((item) => {
+      const imageDiv = document.createElement(`div`);
+      imageDiv.setAttribute("class", "product-card__carousel-image");
+      imageDiv.innerHTML = `
+      <img src="${item.Src}" alt="${item.Title}" data-src="${item.Src}">
+      `;
+      section.appendChild(imageDiv);
     });
     return section.innerHTML;
+  }
+
+  renderColorSwitch(product) {
+    const colors = product.Colors;
+    const tempDiv = document.createElement(`div`);
+    const select = document.createElement(`select`);
+    colors.forEach((item) => {
+      const option = document.createElement(`option`);
+      option.setAttribute(`value`, item.ColorName);
+      option.innerHTML = `${item.ColorName}`;
+      select.appendChild(option);
+    });
+
+    tempDiv.appendChild(select);
+    return tempDiv.innerHTML;
   }
 }
