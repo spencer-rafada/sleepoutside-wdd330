@@ -2,6 +2,7 @@ import {
   setLocalStorage,
   getLocalStorage,
   renderWithTemplate,
+  updateBreadCrumbs,
 } from "./utils.mjs";
 
 export default class ProductDetails {
@@ -12,10 +13,15 @@ export default class ProductDetails {
     this.init();
   }
 
-  async init() {
+  async init(breadcrumb = true) {
     this.product = await this.dataSource.findProductById(this.productId);
-    document.querySelector(`.product-detail`).innerHTML =
-      this.renderProductDetails(this.product);
+    document.querySelector(`.product-detail`).innerHTML = this.renderProductDetails(this.product);
+    if (breadcrumb){
+      updateBreadCrumbs(
+        `
+        <a href="/product-listing">Home</a> / <a href="/product-listing/?category=${this.product.Category}">${this.product.Category}</a> / ${this.product.NameWithoutBrand}`
+      )
+    }
     // add listener to Add to Cart button
     document
       .getElementById("addToCart")

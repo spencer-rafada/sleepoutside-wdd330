@@ -110,6 +110,9 @@ button {
   border-bottom: 2px solid var(--primary-color);
 }
 
+.breadcrumbs{
+  width: 100%;
+}
 /* End utility classes */
 
 /* Alert styles */
