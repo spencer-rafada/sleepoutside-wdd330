@@ -86,7 +86,7 @@ header {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -141,8 +141,35 @@ button {
   animation: slide-out 0.5s forwards;
 }
 
+main .alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid 2px black;
+  margin: 1rem;
+}
+
+main .alert.error {
+  background-color: orange;
+}
+
+main .alert.success {
+  background-color: green;
+  color: white;
+}
+
+main .alert p {
+  display: inline;
+  margin: 0;
+}
+
+main .alert span {
+  cursor: pointer;
+  color: red;
+}
+
 #total {
-  font-size: .6rem;
+  font-size: 0.6rem;
   position: absolute;
   top: -1px;
   right: -3px;
@@ -167,7 +194,6 @@ button {
   line-height: 60px;
   color: var(--font-body);
 }
-
 
 @keyframes slide-in {
   90% {
@@ -226,7 +252,6 @@ button {
 }
 
 /* End of Look up Modal Styles */
-
 
 /* Cart icon styles */
 .cart {
@@ -374,6 +399,26 @@ button {
   max-width: 250px;
 }
 
+.product-card__carousel {
+  height: 8rem;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 1rem;
+}
+
+.product-card__carousel-image {
+  border: solid 1px var(--primary-color);
+  padding: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.product-card__carousel-image img {
+  height: 100%;
+}
+
 .product-card h2,
 .product-card h3,
 .product-card p {
@@ -389,24 +434,26 @@ button {
 }
 
 /*Search form*/
-input{
+input {
   width: 100%;
   border: 3px solid var(--primary-color);
   padding: 5px;
   height: 40px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: #9DBFAF;
+  color: #9dbfaf;
   margin-top: 10px;
 }
-#search-products{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
+
+#search-products {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
 }
-#search-cont{
+
+#search-cont {
   border-bottom: 2px solid var(--primary-color);
 }
 
