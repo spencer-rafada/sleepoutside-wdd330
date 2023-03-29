@@ -1,3 +1,5 @@
+import { updateBreadCrumbs } from "./utils.mjs";
+
 export default class ProductListing {
   constructor(category, dataSource, listElement) {
     this.category = category;
@@ -33,6 +35,7 @@ export default class ProductListing {
   renderList(list) {
     const render = list.map(this.productCardTemplate);
     this.listElement.insertAdjacentHTML("afterbegin", render.join(""));
+    updateBreadCrumbs(`${this.category}->(${list.length} items)`);
   }
 
   filterProduct(productList) {
@@ -57,7 +60,7 @@ async searchProduct(key) {
     );
     this.mainElement.insertAdjacentHTML(
       `beforebegin`,
-      this.productCardModal(item[0])
+      this.productCardModal(item[0]),
     );
     document.querySelector(`.product-bg`).addEventListener(`click`, () => {
       // alert("Test");
@@ -83,7 +86,8 @@ async searchProduct(key) {
   }
 
   productCardModal(product) {
-    return `<div class="product-bg">
+    return `
+    <div class="product-bg">
     <div class="product-modal">
     <div>
     <h1>${product.Brand.Name}</h1>

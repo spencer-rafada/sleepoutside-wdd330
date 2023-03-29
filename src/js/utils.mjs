@@ -14,6 +14,11 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
+export function updateBreadCrumbs(text){
+  document.querySelector(".breadcrumbs").innerHTML = text
+  console.log(text)
+}
+
 export function renderWithTemplate(
   template,
   parentElement,
